@@ -35,15 +35,15 @@ aug_type = args.augment_type
 
 # Datasets
 if args.language == 'english':
-    train_set = Dataset(os.path.join(args.data_path, 'en/train2012'), tokenizer=tokenizer, sequence_len=sequence_len,
+    train_set = Dataset(os.path.join(args.data_path, 'en/brown/large_original_features/train_brown-family-unified_original_features.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
                         token_style=token_style, is_train=True, augment_rate=ar, augment_type=aug_type)
-    val_set = Dataset(os.path.join(args.data_path, 'en/dev2012'), tokenizer=tokenizer, sequence_len=sequence_len,
+    val_set = Dataset(os.path.join(args.data_path, 'en/brown/large_original_features/dev_brown-family-unified_original_features.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
                       token_style=token_style, is_train=False)
-    test_set_ref = Dataset(os.path.join(args.data_path, 'en/test2011'), tokenizer=tokenizer, sequence_len=sequence_len,
+    test_set_ref = Dataset(os.path.join(args.data_path, 'en/brown/large_original_features/test_brown-family-unified_original_features.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
                            token_style=token_style, is_train=False)
-    test_set_asr = Dataset(os.path.join(args.data_path, 'en/test2011asr'), tokenizer=tokenizer, sequence_len=sequence_len,
-                           token_style=token_style, is_train=False)
-    test_set = [val_set, test_set_ref, test_set_asr]
+#    test_set_asr = Dataset(os.path.join(args.data_path, 'en/test2011asr'), tokenizer=tokenizer, sequence_len=sequence_len,
+#                           token_style=token_style, is_train=False)
+    test_set = [val_set, test_set_ref] #, test_set_asr
 elif args.language == 'bangla':
     train_set = Dataset(os.path.join(args.data_path, 'bn/train'), tokenizer=tokenizer, sequence_len=sequence_len,
                         token_style=token_style, is_train=True, augment_rate=ar, augment_type=aug_type)
@@ -73,8 +73,17 @@ elif args.language == 'english-bangla':
     test_bn_asr = Dataset(os.path.join(args.data_path, 'bn/test_asr'), tokenizer=tokenizer, sequence_len=sequence_len,
                           token_style=token_style, is_train=False)
     test_set = [val_set, test_set_ref, test_set_asr, test_set_news, test_bn_ref, test_bn_asr]
+elif args.language == 'russian':
+    train_set = Dataset(os.path.join(args.data_path, 'ru/russian_newsscape/train_russian_2019.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
+                        token_style=token_style, is_train=True, augment_rate=ar, augment_type=aug_type)
+    val_set = Dataset(os.path.join(args.data_path, 'ru/russian_newsscape/dev_russian_2019.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
+                      token_style=token_style, is_train=False)
+    test_set_ref = Dataset(os.path.join(args.data_path, 'ru/russian_newsscape/test_russian_2019.txt'), tokenizer=tokenizer, sequence_len=sequence_len,
+                           token_style=token_style, is_train=False)
+    test_set = [val_set, test_set_ref]
+
 else:
-    raise ValueError('Incorrect language argument for Dataset')
+    raise ValueError('Incorrect language argument for Dataset. You can add more languages by modifying train.py')
 
 # Data Loaders
 data_loader_params = {

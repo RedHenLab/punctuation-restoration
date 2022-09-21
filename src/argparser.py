@@ -15,7 +15,7 @@ def parse_arguments():
                         help='whether to use CRF layer or not')
     parser.add_argument('--data-path', default='data/', type=str, help='path to train/dev/test datasets')
     parser.add_argument('--language', default='english', type=str,
-                        help='language, available options are english, bangla, english-bangla (for training with both)')
+                        help='language, available options are english, bangla, english-bangla (for training with both), russian')
     parser.add_argument('--sequence-length', default=256, type=int,
                         help='sequence length to use when preparing dataset (default 256)')
     parser.add_argument('--augment-rate', default=0., type=float, help='token augmentation probability')
