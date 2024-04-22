@@ -54,7 +54,7 @@ def inference():
     sequence_len = args.sequence_length
     result = ""
     decode_idx = 0
-    punctuation_map = {0: '', 1: ' ,', 2: ' .</s><s>', 3: ' ?</s><s>', 4: ' !</s><s>', 5: ' –'}
+    punctuation_map = {0: '', 1: ' ,', 2: ' . </s> <s>', 3: ' ? </s> <s>', 4: ' ! </s> <s>', 5: ' –'}
     if args.language == 'bn':
         punctuation_map[2] = '।'
 
